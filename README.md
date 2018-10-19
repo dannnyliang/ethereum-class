@@ -8,10 +8,10 @@ Answer:
 `cryptographic hash function`有以下幾種特色，並且在某些方面有特殊的要求
 - 相同的input message必須有相同的hash結果
 - 即使input message只有小小的改動，hash結果會截然不同
-- 必須很難從hash的結果回推出原先的input message
+- 必須很難從hash的結果回推出原先的input message
 - 必須很難找到兩個不同的input message產出相同的hash結果  
 
-區別`cryptographic hash function`與其他`hash function`在於「目的性」，其他`hash function`的目的可能只是為了區別原本的input內容有所改動，對於蓄意想要產出相同hash結果的行為不一定能好好防範
+區別`cryptographic hash function`與其他`hash function`在於「目的性」，其他`hash function`的目的可能只是為了區別原本的input內容有所改動，對於蓄意想要產出相同hash結果的行為不一定能好好防範
 其次，正因為`cryptographic hash function`有比較多的要求，在速度上比起其他`hash function`會略嫌遜色一些
 
 |Categories|Examples
