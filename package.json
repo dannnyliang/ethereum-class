@@ -1,0 +1,11 @@
+{
+  "name": "ethereum-class",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "dannyliang",
+  "license": "MIT",
+  "dependencies": {
+    "ethereumjs-wallet": "^0.6.2",
+    "js-sha3": "^0.8.0"
+  }
+}
