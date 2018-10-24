@@ -21,4 +21,30 @@ Answer:
 
 **2. Peter is a noob in cryptocurrency and would like to get some Ethers. First step for him is to have an Ethereum account. He decides to generate an account and manages the wallet himself so he can understand the principles behind. From the class, he knows the account is created by the following steps:**  
 Answer:  
-*in `hw1/key.js`*
+---Answer2a---  
+hex private key: 1711647fae4d37f42b229c239998771277c3a562ed5ced43ee76b806efa6683e  
+hex public key: b601fac514ddc74213be2b6e90e54f95e484f72f5b5ddfaab1554ed7d506b23a6b7ec0bd7127eded1437879131ebc57dcf3c20521fb5918709c4cf23f6b7c6b7
+
+---Answer2b---  
+hash public key: 64a5b369e164d7fd13d6a2e0ecb19feab0afcff3fe0469308ba05c94e5a93758  
+address: 0xecb19feab0afcff3fe0469308ba05c94e5a93758  
+
+---Answer2c---  
+Keystore:  
+```javascript
+{ address: '41d76ced3c3fa77026156e1c02e2db154978f24c',  
+  crypto:  
+   { cipher: 'aes-128-ctr',  
+     ciphertext: '143cb9dedbb662b550eb62e13744e2d0ea55b5da071395d77b3a65d4dee61aee',  
+     cipherparams: { iv: '992f1bfb2145162021db2d67dca045ca' },  
+     kdf: 'scrypt',
+     kdfparams:
+      { dklen: 32,
+        n: 262144,
+        p: 1,
+        r: 8,
+        salt: 'd3e10c1ff6d8094c37aa8057b153e3dcc8bcb6f380fcaf120c1acba207a09dc4' },
+     mac: '6a98abc43523ad63a136e4a3785d29ed780dc5ccdf3fdc4ee084264615973b05' },
+  id: 'efe1e113-b731-49dd-ac87-09f57ee93b1d',
+  version: 3 }
+```
