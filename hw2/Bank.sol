@@ -68,61 +68,71 @@ contract Bank {
 	// mint coin
     function mint(uint256 coinValue) public isOwner {
         
-        // uint256 value = coinValue * 1 ether;
+        uint256 value = coinValue * 1 ether;
 
         // 增加 msg.sender 的 coinBalance
         // your code
+        coinBalance[msg.sender] += 100;
 
         // emit MintEvent
         // your code
+        emit MintEvent(msg.sender, value, now);
 
     }
 
 	// 使用 bank 中的 ether 向 owner 購買 coin
     function buy(uint256 coinValue) public {
-        // uint256 value = coinValue * 1 ether;
+        uint256 value = coinValue * 1 ether;
 
         // require owner 的 coinBalance 不小於 value
         // your code
+        require(coinBalance[owner] >= value);
 
         // require msg.sender 的 etherBalance 不小於 value
         // your code
-        
+        require(balance[msg.sender] >= value);
 
         // msg.sender 的 etherBalance 減少 value
         // your code
+        coinBalance[msg.sender] -= value;
         
         // owner 的 etherBalance 增加 value
         // your code
-        
+        balance[owner] += value;
 
         // msg.sender 的 coinBalance 增加 value
         // your code
-        
+        balance[msg.sender] += value;
+
         // owner 的 coinBalance 減少 value
         // your code
-        
+        coinBalance[owner] -= value;
 
         // emit BuyCoinEvent
         // your code
+        emit BuyCoinEvent(msg.sender, value, now);
 
     }
 
 	// 轉移 coin
     function transferCoin(address to, uint256 coinValue) public {
-        // uint256 value = coinValue * 1 ether;
+        uint256 value = coinValue * 1 ether;
 
         // require msg.sender 的 coinBalance 不小於 value
         // your code
-        
+        require(coinBalance[msg.sender] >= value);
+
         // msg.sender 的 coinBalance 減少 value
         // your code
-        
+        coinBalance[msg.sender] -= value;
+
         // to 的 coinBalance 增加 value
         // your code
+        balance[to] += value;
 
         // emit TransferCoinEvent
         // your code
+        emit TransferCoinEvent(msg.sender, to, value, now);
 
     }
 
@@ -146,10 +156,11 @@ contract Bank {
 
         // transfer ownership
         // your code
+        owner = newOwner;
         
         // emit TransferOwnerEvent
         // your code
-        
+        emit TransferOwnerEvent(owner, newOwner, now);
     }
 
     function kill() public isOwner {
