@@ -4,10 +4,10 @@ const Web3 = require('web3');
 let web3 = new Web3('http://localhost:8545');
 
 const abi = JSON.parse(
-  fs.readFileSync('./contract/__hw2_Bank_sol_Bank.abi').toString(),
+  fs.readFileSync('./contract/Bank_sol_Bank.abi').toString(),
 );
 const bytecode =
-  '0x' + fs.readFileSync('./contract/__hw2_Bank_sol_Bank.bin').toString();
+  '0x' + fs.readFileSync('./contract/Bank_sol_Bank.bin').toString();
 
 let bank = new web3.eth.Contract(abi);
 
@@ -22,5 +22,8 @@ web3.eth.getAccounts().then(accounts => {
       from: accounts[0],
       gas: 1500000,
     })
-    .on('receipt', receipt => console.log(receipt))
+    .on('receipt', receipt => {
+      console.log(receipt);
+      fs.writeFileSync('./address.txt', receipt.contractAddress);
+    })
 });

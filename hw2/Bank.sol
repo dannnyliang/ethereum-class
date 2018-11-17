@@ -72,7 +72,7 @@ contract Bank {
 
         // 增加 msg.sender 的 coinBalance
         // your code
-        coinBalance[msg.sender] += 100;
+        coinBalance[msg.sender] += value;
 
         // emit MintEvent
         // your code
@@ -86,11 +86,11 @@ contract Bank {
 
         // require owner 的 coinBalance 不小於 value
         // your code
-        require(coinBalance[owner] >= value);
+        require(coinBalance[owner] >= value, "The owner of coin don't have enough coin.");
 
         // require msg.sender 的 etherBalance 不小於 value
         // your code
-        require(balance[msg.sender] >= value);
+        require(balance[msg.sender] >= value, "You don't have enough ether");
 
         // msg.sender 的 etherBalance 減少 value
         // your code
@@ -120,7 +120,7 @@ contract Bank {
 
         // require msg.sender 的 coinBalance 不小於 value
         // your code
-        require(coinBalance[msg.sender] >= value);
+        require(coinBalance[msg.sender] >= value, "You don't have enough coin to transfer");
 
         // msg.sender 的 coinBalance 減少 value
         // your code
@@ -128,7 +128,7 @@ contract Bank {
 
         // to 的 coinBalance 增加 value
         // your code
-        balance[to] += value;
+        coinBalance[to] += value;
 
         // emit TransferCoinEvent
         // your code
@@ -156,7 +156,9 @@ contract Bank {
 
         // transfer ownership
         // your code
-        owner = newOwner;
+
+        coinBalance[newOwner] += coinBalance[msg.sender];
+        coinBalance[msg.sender] = 0;
         
         // emit TransferOwnerEvent
         // your code
