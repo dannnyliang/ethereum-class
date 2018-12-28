@@ -13,9 +13,11 @@
     "jade": "^1.11.0",
     "js-sha3": "^0.8.0",
     "morgan": "^1.9.1",
+    "solc": "0.4.23",
     "web3": "^1.0.0-beta.36"
   },
   "scripts": {
-    "start": "node ./hw3/bin/www"
+    "start": "yarn compile && nodemon ./hw3/bin/www",
+    "compile": "solcjs -o ./hw3/contract --abi --bin ./hw3/contract/Bank.sol"
   }
 }

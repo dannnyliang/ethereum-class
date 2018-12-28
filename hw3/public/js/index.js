@@ -25,8 +25,25 @@ let transferEtherTo = $('#transferEtherTo');
 let transferEtherValue = $('#transferEtherValue');
 let transferEtherButton = $('#transferEtherButton');
 
-// TODO
-// ...
+let mintCoin = $('#mintCoin');
+let mintCoinButton = $('#mintCoinButton');
+
+let buyCoin = $('#buyCoin');
+let buyCoinButton = $('#buyCoinButton');
+
+let transferCoinTo = $('#transferCoinTo');
+let transferCoinValue = $('#transferCoinValue');
+let transferCoinButton = $('#transferCoinButton');
+
+let owner = $('#owner');
+let checkOwnerButton = $('#checkOwnerButton');
+
+let transferOwnerTo = $('#transferOwnerTo');
+let transferOwnerButton = $('#transferOwnerButton');
+
+let transferEtherAdvTo = $('#transferEtherAdvTo');
+let transferEtherAdvValue = $('#transferEtherAdvValue');
+let transferEtherAdvButton = $('#transferEtherAdvButton');
 
 let bankAddress = "";
 let nowAccount = "";
@@ -113,6 +130,7 @@ update.on('click', function () {
 
 			$('#ethBalance').text('以太帳戶餘額 (wei): ' + result.ethBalance)
 			$('#bankBalance').text('銀行ETH餘額 (wei): ' + result.bankBalance)
+			$('#coinBalance').text('NCCU COIN餘額: ' + result.coinBalance)
 		})
 	}
 	else {
@@ -121,6 +139,7 @@ update.on('click', function () {
 		}, function (result) {
 			$('#ethBalance').text('以太帳戶餘額 (wei): ' + result.ethBalance)
 			$('#bankBalance').text('銀行ETH餘額 (wei): ')
+			$('#coinBalance').text('NCCU COIN餘額: ')
 		})
 	}
 })
@@ -283,8 +302,17 @@ transferEtherButton.on('click', async function () {
 	})
 })
 
-// TODO
+// TODO:
 // ...
+checkOwnerButton.on('click', () => {
+	if (bankAddress == "") {
+		return;
+	}
+	console.log('object');
+	console.log(bankAddress);
+	fetch('/owner')
+		.then(res => console.log(res.json()))
+})
 
 // 載入bank合約
 function loadBank(address) {

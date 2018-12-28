@@ -39,10 +39,7 @@
 			<h3 id="accountStatus">帳戶狀態</h3>
 			<h5 id="ethBalance">以太帳戶餘額 (wei): </h5>
 			<h5 id="bankBalance">銀行ETH餘額 (wei): </h5>
-			<!--
-				TODO
-				...
-			-->
+			<h5 id="coinBalance">NCCU COIN餘額: </h5>
 			
 			<hr>
 			<h3 id="updateCoin">更新餘額</h3>
@@ -64,10 +61,37 @@
 			<input id="transferEtherValue" type="number" placeholder="請輸入轉帳額度 (ether)">
 			<button id="transferEtherButton">執行</button>
 
-			<!--
-				TODO
-				...
-			-->
+			<hr>
+			<h3>鑄 NCCU Coin（帳戶請選擇合約的 owner）</h3>
+			<input id="mintCoin" type="number" placeholder="請輸入NCCU Coin金額">
+			<button id="mintCoinButton">執行</button>
+			
+			<hr>
+			<h3>購買 NCCU Coin</h3>
+			<input id="buyCoin" type="number" placeholder="請輸入NCCU Coin金額">
+			<button id="buyCoinButton">執行</button>
+			
+			<hr>
+			<h3>轉帳 NCCU Coin</h3>
+			<input id="transferCoinTo" type="text" placeholder="請輸入對象">
+			<input id="transferCoinValue" type="number" placeholder="請輸入NCCU Coin金額">
+			<button id="transferCoinButton">執行</button>
+			
+			<hr>
+			<h3>檢查 Owner</h3>
+			<h5 id="Owner">Owner 帳戶：</h5>
+			<button id="checkOwnerButton">執行</button>
+			
+			<hr>
+			<h3>轉移 Owner</h3>
+			<input id="transferOwnerTo" type="text" placeholder="請輸入對象">
+			<button id="transferOwnerButton">執行</button>
+
+			<hr>
+			<h3>轉帳 ETH（進階功能）</h3>
+			<input id="transferEtherAdvTo" type="text" placeholder="請輸入轉帳對象">
+			<input id="transferEtherAdvValue" type="number" placeholder="請輸入轉帳額度 (ether)">
+			<button id="transferEtherAdvButton">執行</button>
 
 		</div>
 		<div class="item" style="width:500px;">
@@ -77,7 +101,7 @@
 	</div>
 
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-	<script src="javascripts/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 
 </html>
