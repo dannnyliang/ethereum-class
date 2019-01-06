@@ -18,6 +18,6 @@
   },
   "scripts": {
     "start": "yarn compile && nodemon ./hw3/bin/www",
-    "compile": "solcjs -o ./hw3/contract --abi --bin ./hw3/contract/Bank.sol"
+    "compile": "solcjs -o ./hw3/contract --abi --bin ./hw3/contract/Bank.sol && node ./hw3/contract/combineJSON.js"
   }
 }

@@ -57,6 +57,38 @@ function log(...inputs) {
 	}
 }
 
+function parseToInt(input) { return Number.parseInt(input) };
+
+function getFetch(path = '/', body = {}, failText = '失敗') {
+	return fetch(path, body)
+	.then(res => {
+		if (!res.ok) {
+			log(res.statusText, failText) 
+			return
+		};
+		update.trigger('click');
+		return res.json();
+	})
+}
+
+function postFetch(path = '/', body = {}, failText = '失敗') {
+	return fetch(path, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body),
+	})
+	.then(res => {
+		if (!res.ok) {
+			log(res.statusText, failText)
+			return
+		};
+		update.trigger('click');
+		return res.json();
+	})
+}
+
 // 載入使用者至 select tag
 $.get('/accounts', function (accounts) {
 	for (let account of accounts) {
@@ -205,7 +237,7 @@ depositButton.on('click', async function () {
 	$.post('/deposit', {
 		address: bankAddress,
 		account: nowAccount,
-		value: deposit.val()
+		value: parseToInt(deposit.val()),
 	}, function (result) {
 		if (result.events !== undefined) {
 			log(result.events.DepositEvent.returnValues, '存款成功')
@@ -244,7 +276,7 @@ withdrawButton.on('click', async function () {
 	$.post('/withdraw', {
 		address: bankAddress,
 		account: nowAccount,
-		value: parseInt(withdraw.val(), 10)
+		value: parseToInt(withdraw.val()),
 	}, function (result) {
 		if (result.events !== undefined) {
 			log(result.events.WithdrawEvent.returnValues, '提款成功')
@@ -283,7 +315,7 @@ transferEtherButton.on('click', async function () {
 		address: bankAddress,
 		account: nowAccount,
 		to: transferEtherTo.val(),
-		value: parseInt(transferEtherValue.val(), 10)
+		value: parseToInt(transferEtherValue.val()),
 	}, function (result) {
 		if (result.events !== undefined) {
 			log(result.events.TransferEvent.returnValues, '轉帳成功')
@@ -305,13 +337,98 @@ transferEtherButton.on('click', async function () {
 // TODO:
 // ...
 checkOwnerButton.on('click', () => {
-	if (bankAddress == "") {
+	const body = {
+		address: bankAddress,
+		account: nowAccount,	
+	}
+	getFetch('/owner', body)
+	.then(res => owner.text('Owner 帳戶：' + res.owner))
+})
+
+mintCoinButton.on('click', async () => {
+
+	// 解鎖
+	let unlock = await unlockAccount();
+	if (!unlock) {
 		return;
 	}
-	console.log('object');
-	console.log(bankAddress);
-	fetch('/owner')
-		.then(res => console.log(res.json()))
+
+	const body = {
+		address: bankAddress,
+		account: nowAccount,
+		value: parseToInt(mintCoin.val()),
+	}
+	postFetch('/mintCoin', body, '鑄幣失敗')
+	.then(res => log(res.events.MintEvent.returnValues, '鑄幣成功'))
+})
+
+buyCoinButton.on('click', async () => {
+
+	// 解鎖
+	let unlock = await unlockAccount();
+	if (!unlock) {
+		return;
+	}
+
+	const body = {
+		address: bankAddress,
+		account: nowAccount,
+		value: parseToInt(buyCoin.val()),
+	}
+	postFetch('/buyCoin', body, '買幣失敗')
+	.then(res => log(res.events.BuyCoinEvent.returnValues, '買幣成功'))
+})
+
+transferCoinButton.on('click', async () => {
+
+	// 解鎖
+	let unlock = await unlockAccount();
+	if (!unlock) {
+		return;
+	}
+
+	const body = {
+		address: bankAddress,
+		account: nowAccount,
+		to: transferCoinTo.val(),
+		value: parseToInt(transferCoinValue.val()),
+	}
+	postFetch('/transferCoin', body, '轉幣失敗')
+	.then(res => log(res.events.TransferCoinEvent.returnValues, '轉幣成功'))
+})
+
+transferOwnerButton.on('click', async () => {
+
+	// 解鎖
+	let unlock = await unlockAccount();
+	if (!unlock) {
+		return;
+	}
+
+	const body = {
+		address: bankAddress,
+		account: nowAccount,
+		to: transferOwnerTo.val(),
+	}
+	postFetch('/transferOwner', body, '轉移所有權失敗')
+	.then(res => log(res.events.TransferOwnerEvent.returnValues, '轉移所有權成功'))
+})
+
+transferEtherAdvButton.on('click', async () => {
+
+	// 解鎖
+	let unlock = await unlockAccount();
+	if (!unlock) {
+		return;
+	}
+	
+	const body = {
+		account: nowAccount,
+		to: transferEtherAdvTo.val(),
+		value: parseToInt(transferEtherAdvValue.val()),
+	}
+	postFetch('/transferAdvTo', body, '轉帳失敗')
+	.then(() => { log('轉帳成功') })
 })
 
 // 載入bank合約
